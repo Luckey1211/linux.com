@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Microsoft Hackathon 2026</title>
+  <style>
+    :root {
+      --primary: #0067b8;
+      --primary-dark: #004a8c;
+      --accent: #107c10;
+      --accent-soft: #eaf9ea;
+      --bg: #f3f7fb;
+      --card: #ffffff;
+      --text: #1f2a37;
+      --muted: #586779;
+      --border: #dfe8f3;
+      --shadow: 0 18px 45px rgba(15, 23, 42, 0.08);
+      --hero-glow: rgba(255,255,255,0.18);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Segoe UI, Arial, Helvetica, sans-serif;
+      background: linear-gradient(180deg, #f4f8fc 0%, #edf3fb 100%);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    a { text-decoration: none; }
+    img { max-width: 100%; display: block; }
+    .container { width: min(1160px, 92%); margin: 0 auto; }
+    header {
+      position: relative;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      color: white;
+      padding: 1.4rem 0 5rem;
+      overflow: hidden;
+    }
+    header::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 80% 10%, var(--hero-glow), transparent 28%),
+        radial-gradient(circle at 15% 80%, rgba(255,255,255,0.12), transparent 20%);
+    }
+    .nav, .hero, .register-wrap .content { position: relative; z-index: 1; }
+    .nav {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 1rem; margin-bottom: 3.4rem;
+    }
+    .brand { font-size: 1.4rem; font-weight: 700; letter-spacing: 0.02em; }
+    .nav-links { display: flex; gap: 1.6rem; flex-wrap: wrap; }
+    .nav-links a { color: rgba(255,255,255,0.9); font-size: 0.96rem; font-weight: 600; }
+    .hero {
+      display: grid; grid-template-columns: 1.35fr 0.75fr;
+      gap: 2rem; align-items: center;
+    }
+    .hero h1 {
+      margin: 0 0 1rem; font-size: clamp(2.7rem, 5vw, 4.7rem);
+      line-height: 1.05; letter-spacing: -0.05em;
+    }
+    .hero-text {
+      max-width: 620px; font-size: 1.08rem; color: rgba(255,255,255,0.9);
+      margin: 0 0 1.6rem;
+    }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 0.8rem; }
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      padding: 0.95rem 1.5rem; border-radius: 12px; font-weight: 700;
+      transition: 0.2s ease; border: none; cursor: pointer; font-size: 1rem;
+    }
+    .btn:hover { transform: translateY(-1px); }
+    .btn-primary {
+      background: var(--accent); color: white;
+      box-shadow: 0 12px 24px rgba(16, 124, 16, 0.22);
+    }
+    .btn-primary:hover { background: #0d8b0d; }
+    .btn-secondary {
+      background: rgba(255,255,255,0.1); color: white;
+      border: 1px solid rgba(255,255,255,0.35);
+    }
+    .btn-secondary:hover { background: rgba(255,255,255,0.18); }
+    .pill {
+      display: inline-flex; align-items: center; padding: 0.52rem 0.9rem;
+      margin-bottom: 1rem; border-radius: 999px; background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.14); font-size: 0.73rem;
+      font-weight: 700; text-transform: uppercase; letter-spacing: 0.09em;
+      color: rgba(255,255,255,0.95);
+    }
+    .hero-card {
+      background: rgba(255,255,255,0.09); border: 1px solid rgba(255,255,255,0.18);
+      border-radius: 22px; padding: 1.5rem; box-shadow: var(--shadow);
+      backdrop-filter: blur(8px);
+    }
+    .stats {
+      display: grid; grid-template-columns: repeat(2, minmax(120px, 1fr));
+      gap: 1rem; margin-top: 0.8rem;
+    }
+    .stat {
+      border-radius: 16px; padding: 1rem 0.8rem;
+      background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.12);
+    }
+    .stat strong { display: block; font-size: 1.55rem; margin-bottom: 0.2rem; }
+    .stat span { color: rgba(255,255,255,0.8); font-size: 0.8rem; }
+    main { padding: 4.2rem 0 4rem; }
+    section { margin-bottom: 4rem; }
+    .section-heading { text-align: center; margin-bottom: 2rem; }
+    .section-heading h2 {
+      margin: 0 0 0.6rem; font-size: clamp(2rem, 3vw, 2.8rem);
+      letter-spacing: -0.04em;
+    }
+    .section-heading p {
+      max-width: 700px; margin: 0 auto; color: var(--muted); font-size: 1.03rem;
+    }
+    .details-grid, .schedule-grid, .perks-grid { display: grid; gap: 1.5rem; }
+    .details-grid { grid-template-columns: repeat(2, minmax(250px, 1fr)); }
+    .detail-card, .schedule-item, .perk {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 18px; padding: 1.5rem; box-shadow: var(--shadow);
+    }
+    .label {
+      display: inline-block; margin-bottom: 0.7rem; font-size: 0.74rem;
+      letter-spacing: 0.09em; text-transform: uppercase;
+      color: var(--primary); font-weight: 700;
+    }
+    .detail-card p { margin: 0; font-size: 1.12rem; font-weight: 700; color: var(--text); }
+    .schedule-grid { grid-template-columns: repeat(3, minmax(220px, 1fr)); }
+    .time {
+      display: inline-block; background: #edf5ff; color: var(--primary);
+      font-size: 0.76rem; font-weight: 700; padding: 0.48rem 0.78rem;
+      border-radius: 999px; margin-bottom: 0.8rem;
+    }
+    .schedule-item h3 { margin: 0 0 0.6rem; font-size: 1.18rem; }
+    .schedule-item p, .perk p { margin: 0; color: var(--muted); }
+    .perks-grid { grid-template-columns: repeat(3, minmax(220px, 1fr)); }
+    .perk {
+      background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
+      text-align: center;
+    }
+    .icon {
+      width: 64px; height: 64px; margin: 0 auto 1rem; border-radius: 50%;
+      background: var(--accent-soft); color: var(--accent);
+      display: flex; align-items: center; justify-content: center; font-size: 2rem;
+    }
+    .perk h3 { margin: 0 0 0.55rem; font-size: 1.18rem; }
+    .register-wrap {
+      background: linear-gradient(135deg, #0b4f8c 0%, #0b7cc7 100%);
+      border-radius: 26px; padding: 2.2rem; color: white; box-shadow: var(--shadow);
+    }
+    .register-wrap .content {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: center;
+    }
+    .register-wrap h2 { margin: 0 0 0.8rem; font-size: clamp(2rem, 3vw, 2.8rem); letter-spacing: -0.04em; }
+    .register-wrap p { margin: 0 0 0.9rem; color: rgba(255,255,255,0.9); }
+    .register-box {
+      background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.18);
+      border-radius: 18px; padding: 1.3rem;
+    }
+    form { display: grid; gap: 1rem; }
+    .field { display: grid; gap: 0.38rem; }
+    .field label { color: rgba(255,255,255,0.96); font-size: 0.9rem; font-weight: 700; }
+    .field input, .field select {
+      width: 100%; padding: 0.92rem 0.95rem; border-radius: 10px;
+      border: 1px solid rgba(255,255,255,0.25);
+      background: rgba(255,255,255,0.08); color: white; font-size: 1rem; outline: none;
+    }
+    .field input::placeholder { color: rgba(255,255,255,0.72); }
+    .field input:focus, .field select:focus {
+      border-color: rgba(255,255,255,0.6); box-shadow: 0 0 0 3px rgba(255,255,255,0.1);
+    }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .success-message {
+      display: none; margin-top: 0.5rem; padding: 0.8rem 1rem;
+      border-radius: 10px; background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.15); color: #effef1; font-weight: 700;
+    }
+    .success-message.show { display: block; }
+    footer { text-align: center; padding: 1rem 0 2.2rem; color: var(--muted); font-size: 0.96rem; }
+    @media (max-width: 900px) {
+      .hero, .register-wrap .content, .details-grid, .schedule-grid, .perks-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    @media (max-width: 640px) {
+      .nav { flex-direction: column; align-items: flex-start; }
+      .nav-links { gap: 0.9rem 1rem; }
+      .form-row { grid-template-columns: 1fr; }
+      header { padding-bottom: 4rem; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <nav class="nav">
+        <div class="brand">Microsoft Hackathon 2026</div>
+        <div class="nav-links">
+          <a href="#about">About</a>
+          <a href="#schedule">Schedule</a>
+          <a href="#benefits">Benefits</a>
+          <a href="#register">Register</a>
+        </div>
+      </nav>
+      <div class="hero">
+        <div>
+          <span class="pill">Innovation • Collaboration • Coding</span>
+          <h1>Build the Future with Microsoft</h1>
+          <p class="hero-text">Join a high-energy hackathon where creativity, technology, and teamwork come together. Solve real-world challenges, learn with mentors, and showcase your ideas to a vibrant innovation community.</p>
+          <div class="hero-actions">
+            <a href="#register" class="btn btn-primary">Register Now</a>
+            <a href="#about" class="btn btn-secondary">Learn More</a>
+          </div>
+        </div>
+        <div class="hero-card">
+          <span class="pill">Event Snapshot</span>
+          <div class="stats">
+            <div class="stat"><strong>20 Sep</strong><span>Event Date</span></div>
+            <div class="stat"><strong>₹100</strong><span>Registration Fee</span></div>
+            <div class="stat"><strong>Dehradun</strong><span>Center</span></div>
+            <div class="stat"><strong>24h</strong><span>ID card before</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section id="about" class="container">
+      <div class="section-heading">
+        <h2>Event Details</h2>
+        <p>Everything you need to know before joining the competition and creating your next breakthrough idea.</p>
+      </div>
+      <div class="details-grid">
+        <div class="detail-card"><span class="label">Date</span><p>20 September 2026</p></div>
+        <div class="detail-card"><span class="label">Registration Fee</span><p>₹100</p></div>
+        <div class="detail-card"><span class="label">Center</span><p>Dehradun</p></div>
+        <div class="detail-card"><span class="label">ID Card Release</span><p>24 hours before the event</p></div>
+        <div class="detail-card"><span class="label">Includes</span><p>Participation Certificate</p></div>
+        <div class="detail-card"><span class="label">Format</span><p>Innovation challenge and team-based development</p></div>
+      </div>
+    </section>
+
+    <section id="schedule" class="container">
+      <div class="section-heading">
+        <h2>Hackathon Schedule</h2>
+        <p>A program designed to spark creativity, teamwork, and impactful problem-solving from start to finish.</p>
+      </div>
+      <div class="schedule-grid">
+        <div class="schedule-item"><span class="time">09:00 AM</span><h3>Check-in & Welcome</h3><p>Registration, networking, and a warm introduction to the event objectives.</p></div>
+        <div class="schedule-item"><span class="time">10:00 AM</span><h3>Problem Statement Launch</h3><p>Teams receive the challenge brief and begin ideating their innovative solution.</p></div>
+        <div class="schedule-item"><span class="time">01:00 PM</span><h3>Mentoring Session</h3><p>Industry mentors provide guidance, coaching, and technical support to participants.</p></div>
+      </div>
+    </section>
+
+    <section id="benefits" class="container">
+      <div class="section-heading">
+        <h2>Why Join?</h2>
+        <p>Develop skills, collaborate with peers, and build the confidence to turn ideas into real impact.</p>
+      </div>
+      <div class="perks-grid">
+        <div class="perk"><div class="icon">💡</div><h3>Creative Thinking</h3><p>Work on real-world challenges and design bold, practical solutions.</p></div>
+        <div class="perk"><div class="icon">🤝</div><h3>Team Collaboration</h3><p>Connect with builders, thinkers, and tech enthusiasts to co-create.</p></div>
+        <div class="perk"><div class="icon">🏆</div><h3>Recognition</h3><p>Earn a participation certificate and hands-on experience for your future.</p></div>
+      </div>
+    </section>
+
+    <section id="register" class="container">
+      <div class="register-wrap">
+        <div class="content">
+          <div>
+            <h2>Ready to innovate?</h2>
+            <p>Reserve your seat and be part of a dynamic hackathon experience that challenges your talent and creativity.</p>
+            <p>Registration is quick and easy. Fill in your details and confirm your participation.</p>
+          </div>
+          <div class="register-box">
+            <form id="registerForm">
+              <div class="field"><label for="name">Full Name</label><input type="text" id="name" name="name" placeholder="Enter your name" required /></div>
+              <div class="field"><label for="email">Email Address</label><input type="email" id="email" name="email" placeholder="Enter your email" required /></div>
+              <div class="form-row">
+                <div class="field"><label for="college">College / Organization</label><input type="text" id="college" name="college" placeholder="College name" required /></div>
+                <div class="field"><label for="course">Course</label><input type="text" id="course" name="course" placeholder="Your field" required /></div>
+              </div>
+              <div class="field">
+                <label for="team">Team Type</label>
+                <select id="team" name="team" required>
+                  <option value="">Select</option><option value="Individual">Individual</option><option value="Team">Team</option>
+                </select>
+              </div>
+              <button type="submit" class="btn btn-primary" style="width:100%;">Register Now</button>
+              <div id="successMessage" class="success-message">Registration submitted successfully! We’ll contact you soon.</div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>© 2026 Microsoft Hackathon. All rights reserved.</footer>
+
+  <script>
+    document.getElementById("registerForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+      const name = document.getElementById("name").value.trim();
+      const email = document.getElementById("email").value.trim();
+      if (!name || !email) {
+        alert("Please fill in the required fields.");
+        return;
+      }
+      document.getElementById("successMessage").classList.add("show");
+      this.reset();
+    });
+  </script>
+</body>
+</html>
