@@ -34,7 +34,7 @@
       color: #0078d4;
       border-bottom: 2px solid #eee;
       padding-bottom: 8px;
-      margin-top: 1.5rem;
+      margin-top: 2rem;
     }
     .details-list {
       list-style: none;
@@ -88,22 +88,56 @@
       font-size: 0.9rem;
       color: #666;
     }
-    .cta-button {
+    /* Form Styles */
+    .form-group {
+      margin-bottom: 1.2rem;
+    }
+    .form-group label {
       display: block;
-      width: 220px;
-      margin: 2.5rem auto 1rem;
+      margin-bottom: 6px;
+      font-weight: 600;
+      color: #444;
+    }
+    .form-group input, .form-group select {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      box-sizing: border-box;
+      font-size: 1rem;
+    }
+    .payment-box {
+      background: #eef6fc;
+      border: 1px dashed #0078d4;
+      padding: 15px;
+      border-radius: 6px;
+      margin-bottom: 1.5rem;
+    }
+    .submit-btn {
+      display: block;
+      width: 100%;
       padding: 1rem;
       background-color: #107c10;
       color: #fff;
-      text-align: center;
-      text-decoration: none;
+      border: none;
       border-radius: 6px;
       font-size: 1.2rem;
       font-weight: bold;
+      cursor: pointer;
       transition: background 0.2s;
     }
-    .cta-button:hover {
+    .submit-btn:hover {
       background-color: #0b5a0b;
+    }
+    .success-msg {
+      display: none;
+      background: #d4edda;
+      color: #155724;
+      padding: 15px;
+      border-radius: 5px;
+      margin-top: 15px;
+      text-align: center;
+      font-weight: bold;
     }
   </style>
 </head>
@@ -142,7 +176,46 @@
       </div>
     </div>
 
-    <a href="#" class="cta-button">Register Now</a>
+    <h2>Register for Hackathon</h2>
+    <form id="regForm" onsubmit="event.preventDefault(); document.getElementById('success').style.display = 'block';">
+      <div class="form-group">
+        <label>Full Name</label>
+        <input type="text" placeholder="Enter your full name" required>
+      </div>
+
+      <div class="form-group">
+        <label>Email Address</label>
+        <input type="email" placeholder="example@mail.com" required>
+      </div>
+
+      <div class="form-group">
+        <label>Phone / WhatsApp Number</label>
+        <input type="tel" placeholder="+91 XXXXX XXXXX" required>
+      </div>
+
+      <div class="form-group">
+        <label>College / Organization</label>
+        <input type="text" placeholder="Enter college or company name" required>
+      </div>
+
+      <div class="payment-box">
+        <strong>Fee Payment: ₹100</strong>
+        <p style="margin: 6px 0 0; font-size: 0.9rem; color: #555;">
+          UPI ID: <strong>your-upi-id@okhdfcbank</strong> (Yahan apni UPI ID replace karein)
+        </p>
+      </div>
+
+      <div class="form-group">
+        <label>UPI Transaction ID / UTR</label>
+        <input type="text" placeholder="Enter 12-digit transaction ID" required>
+      </div>
+
+      <button type="submit" class="submit-btn">Complete Registration (₹100)</button>
+    </form>
+
+    <div id="success" class="success-msg">
+      Registration submitted successfully! Your ID card will be issued 24 hours prior to the event.
+    </div>
   </main>
 
 </body>
